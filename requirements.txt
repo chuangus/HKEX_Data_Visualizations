@@ -1,0 +1,10 @@
+plotly
+pandas
+numpy
+xlsxwriter
+scipy
+streamlit
+investpy
+openpyxl
+yfinance
+datetime
