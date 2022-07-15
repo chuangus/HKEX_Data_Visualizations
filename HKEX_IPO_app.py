@@ -22,7 +22,14 @@ st.set_page_config(layout="wide")
 st.title('HKEX IPO Performance')
 st.write ('All assumptions and further info can be found in [documentation](https://github.com/epiphronquant/HKEX-IPO-app)')
 
-df = pd.read_excel(r'https://github.com/epiphronquant/HKEX-IPO-app/blob/main/RawData.xlsx?raw=true')
+@st.cache(ttl= 1800) ## Data would need to get reloaded every 30 minutes
+def load_data(link):
+    df = pd.read_excel(link)
+    return df
+link = r'https://github.com/epiphronquant/HKEX-IPO-app/blob/main/RawData.xlsx?raw=true'
+df = load_data(link)
+
+
 df_export = df
 df = df.loc[df['Count as IPO?'] == 1] ### Filters rows where it is actually an IPO
 df['Listing Date▼']= pd.to_datetime(df['Listing Date▼'])### converts listing date to datetime variable
