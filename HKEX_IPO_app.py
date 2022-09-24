@@ -26,7 +26,7 @@ st.write ('All assumptions and further info can be found in [documentation](http
 def load_data(link):
     df = pd.read_excel(link)
     return df
-link = r'https://github.com/epiphronquant/HKEX-IPO-app/blob/main/RawData.xlsx?raw=true'
+link = r'https://github.com/chuangus/HKEX-IPO-app/blob/main/RawData.xlsx?raw=true'
 df = load_data(link)
 
 
@@ -45,14 +45,20 @@ with column_1:
         df['Name'] = df['Name CN']
     else:
         pass
-with column_2:### Chart of distribution and Lead 1 Chart
-    sectors = df['Sector']
-    sectors = sectors.tolist()
-    sectors = list(dict.fromkeys(sectors))
-    healthcare = sectors [0]
-    sectors.append('All')### adds an option for All IPOs
+sectors = df['Sector']
+sectors = sectors.tolist()
+sectors = list(dict.fromkeys(sectors))
+healthcare = sectors [0]
+sectors.append('All')### adds an option for All IPOs
+try:
     sectors = sorted(sectors [1:])
-    sectors.insert(0, healthcare)
+except TypeError:
+    st.write ('**Please contact administrator angus.chu@epiphroncapital.com to manually update Sector and Industry Data.**')
+    sectors = sorted(sectors [1:])
+    
+sectors.insert(0, healthcare)
+with column_2:### Chart of distribution and Lead 1 Chart
+    
     sector = st.selectbox(
         'Which sector are you interested in?',
           sectors)
