@@ -53,7 +53,7 @@ sectors.append('All')### adds an option for All IPOs
 try:
     sectors = sorted(sectors [1:])
 except TypeError:
-    st.write ('**Please contact administrator angus.chu@epiphroncapital.com to manually update Sector and Industry Data.**')
+    st.write ('**Please contact administrator angus.chu100@gmail.com to manually update Sector and Industry Data.**')
     sectors = sorted(sectors [1:])
     
 sectors.insert(0, healthcare)
